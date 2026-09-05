@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los 8 papers de IA más importantes de agosto 2026 | Papers Blog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Los 8 papers de IA más importantes de agosto 2026</h1>
+<p class="sub">Selección del 5 de septiembre de 2026, orientada a un perfil de investigación en LLMs, agentes, multimodalidad, IA en educación, modelos eficientes y ciencia abierta. La señal de impacto principal son los votos de la comunidad en HuggingFace Papers.</p>
+</header>
+
+<div class="paper">
+<h2>1. BDH-CQ: In-Context Learning with Recurrent Latent Reasoning</h2>
+<p><span class="tag">LLMs</span><span class="tag">Razonamiento</span> <a href="https://arxiv.org/abs/2608.09888">arXiv:2608.09888</a> (10 ago 2026, Pathway)</p>
+<p class="impacto"><strong>Impacto:</strong> el paper más votado de agosto en HuggingFace Papers, con 772 votos. Evaluado de forma independiente en el benchmark público ARC-AGI-1.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Los LLMs actuales razonan "en voz alta" (cadena de pensamiento verbalizada). BDH-CQ demuestra otra vía: un modelo que aprende de los ejemplos que le muestras en el prompt, sin reentrenar, y razona iterando en un espacio latente interno, sin escribir sus pasos intermedios. Además muestra que darle más "esfuerzo" de razonamiento mejora sus resultados (pass@2), una propiedad buscada en los modelos de razonamiento actuales.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Imagina una pizarra interna que el modelo va actualizando con cada ejemplo que ve. Esa pizarra es una memoria recurrente (heredada de la arquitectura BDH, inspirada en cómo trabaja el cerebro: actividad dispersa, estado persistente y ajuste continuo). Cuando llega un problema nuevo, el modelo consulta y repasa esa pizarra varias veces internamente hasta dar la respuesta, en vez de escribir sus cálculos paso a paso. Los ejemplos del prompt nunca se usaron en el entrenamiento, así que lo que aprende lo aprende "en el momento".</p>
+</div>
+
+<div class="paper">
+<h2>2. LLMRouter: Unified Infrastructure for Developing, Evaluating, and Deploying LLM Routers</h2>
+<p><span class="tag">LLMs</span><span class="tag">Sistemas</span><span class="tag">Open source</span> <a href="https://arxiv.org/abs/2608.06867">arXiv:2608.06867</a> (7 ago 2026, Univ. of Illinois y colaboradores)</p>
+<p class="impacto"><strong>Impacto:</strong> 111 votos en HuggingFace Papers. Incluye benchmark propio (xRouteBench) y una librería abierta con más de 16 routers. Sus routers aprendidos superan un 14,6% (relativo) al mejor modelo fijo.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Ningún LLM es el mejor para todo, así que en producción se usa un "router" que decide a qué modelo va cada consulta (calidad vs. coste). Hasta ahora cada router era un mundo y no se podían comparar. Este trabajo unifica todos los enfoques en un mismo marco matemático y ofrece el primer banco de pruebas común, con escenarios reales: conversaciones largas, visión, series temporales y preferencias personalizadas.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Lo plantea como un repartidor de llamadas: en cada paso el router mira la pregunta, quién la hace y lo que ya ha pasado, y decide si se la manda a un modelo barato, a uno caro, o si ya tiene suficiente para responder. Al formularlo como un proceso de decisión paso a paso, routers que parecían incompatibles caben en el mismo molde, se entrenan igual y se comparan limpiamente. Conclusión práctica: enrutar bien da mejor calidad que usar siempre el mejor modelo, y más barato.</p>
+</div>
+
+<div class="paper">
+<h2>3. SkillZip: Contract-Preserving Graph Compression for Scalable Agent Skill Libraries</h2>
+<p><span class="tag">Agentes</span><span class="tag">Compresión</span> <a href="https://arxiv.org/abs/2608.05604">arXiv:2608.05604</a> (6 ago 2026, UNSW y CSIRO)</p>
+<p class="impacto"><strong>Impacto:</strong> 80 votos en HuggingFace Papers. Ataca un cuello de botella real de los agentes: las librerías de habilidades reutilizables no caben en la ventana de contexto cuando crecen.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Los agentes modernos guardan lo que saben hacer en "skills" (procedimientos reutilizables) que cargan en el prompt. Cuando la librería crece, meterlo todo es imposible y recortar a lo bruto rompe los pasos. SkillZip comprime la librería entera sin romper las reglas de cada procedimiento (sus "contratos": precondiciones, orden de pasos, resultados), de modo que el agente solo carga el mínimo contexto ejecutable para la tarea que tiene delante.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Funciona como un buen índice de un manual enorme. Primero convierte cada skill en un grafito de pasos (Sec2Graph). Luego detecta patrones que se repiten en muchos skills y los guarda una sola vez (MotifZip), como cuando en un recetario escribes "bechamel (ver página 3)" en vez de repetir la receta. Cuando el agente necesita trabajar, reconstruye solo las páginas necesarias dentro del límite de contexto (PathHydrate), y cuando se añaden skills nuevos actualiza el índice sin rehacerlo todo (ReZip).</p>
+</div>
+
+<div class="paper">
+<h2>4. Intern-S2-Preview: Scientific Agentic Foundation Model</h2>
+<p><span class="tag">Multimodal</span><span class="tag">Ciencia abierta</span> <a href="https://arxiv.org/abs/2608.13505">arXiv:2608.13505</a> (13 ago 2026, Shanghai AI Laboratory)</p>
+<p class="impacto"><strong>Impacto:</strong> 72 votos en HuggingFace Papers y, sobre todo, es un modelo abierto y descargable (disponible en HuggingFace), no solo un paper: cualquiera puede usarlo para investigación científica.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Un modelo fundacional de 397B pensado para hacer ciencia de verdad: razona sobre evidencia de distintos tipos (texto, imagen, series temporales), usa herramientas y mantiene tareas de largo recorrido. Incluye mejoras de ingeniería muy concretas: entrenamiento por refuerzo más estable y barato, y una forma de añadirle especialización nueva sin reentrenar el modelo base.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>La pieza más interesante es el "Memory Decoder": en vez de reentrenar el cerebro completo del modelo cada vez que sale conocimiento científico nuevo, le conectan módulos de memoria externos entrenados aparte. Un pequeño conmutador decide en cada token cuánto debe pesar la memoria especializada frente al modelo general. Como añadir enciclopedias nuevas a la estantería de un investigador sin tener que volver a educarlo desde cero.</p>
+</div>
+
+<div class="paper">
+<h2>5. MatrAIx: Simulating the World with 8.3 Billion Persona Agents</h2>
+<p><span class="tag">Agentes</span><span class="tag">Simulación</span> <a href="https://arxiv.org/abs/2608.04205">arXiv:2608.04205</a> (4 ago 2026)</p>
+<p class="impacto"><strong>Impacto:</strong> 53 votos en HuggingFace Papers. Escala sin precedentes: 8.300 millones de agentes-persona, la población mundial simulada.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Evaluar productos y sistemas de IA con humanos reales es caro y lento, y las evaluaciones automáticas suelen ignorar la diversidad humana. MatrAIx permite probar sistemas con poblaciones simuladas heterogéneas a escala planetaria: cada agente tiene su propia persona y comportamiento interactivo.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Es un "sondeo" a escala mundial pero con gente sintética: en lugar de preguntar a mil personas reales qué les parece un cambio en una app, se lo preguntas a millones de personas simuladas con perfiles distintos, y observas cómo reaccionan e interactúan. La clave técnica está en hacer que tantos agentes quepan y corran a la vez sin que cueste una fortuna.</p>
+</div>
+
+<div class="paper">
+<h2>6. Video-DeepResearch: Towards the Next-Generation Multimodal Deepresearch Agent</h2>
+<p><span class="tag">Multimodal</span><span class="tag">Agentes</span> <a href="https://arxiv.org/abs/2608.03979">arXiv:2608.03979</a> (4 ago 2026)</p>
+<p class="impacto"><strong>Impacto:</strong> 53 votos en HuggingFace Papers. Extiende los agentes de "deep research" (que investigan por ti en la web) del texto y la imagen al vídeo continuo.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Los agentes que investigan temas por internet funcionan con texto e imágenes sueltas, pero no con vídeo largo. Video-DR razona sobre streams de vídeo continuos anclándose en momentos concretos (grounding espaciotemporal) y combinándolo con búsqueda abierta en la web. Además diagnostica dos fallos de los modelos actuales: hacen trampas buscando texto en vez de mirar el vídeo (sesgo de modalidad) y se inventan respuestas de memoria (fuga de conocimiento paramétrico).</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Es un becario que ve un partido entero y puede pausar en el minuto exacto para contestarte "¿quién marcó el segundo gol y qué dijo la prensa?". Para eso necesita dos cosas: señalar bien dónde pasa cada cosa en el vídeo y contrastar lo que ve con lo que encuentra en internet, en lugar de responder de memoria.</p>
+</div>
+
+<div class="paper">
+<h2>7. Agent Memory Distillation: Empowering Small LLM Agents with Hierarchical Teacher Memory</h2>
+<p><span class="tag">Agentes</span><span class="tag">Modelos pequeños / edge</span> <a href="https://arxiv.org/abs/2608.07169">arXiv:2608.07169</a> (7 ago 2026)</p>
+<p class="impacto"><strong>Impacto:</strong> 50 votos en HuggingFace Papers. Resultados llamativos: un modelo pequeño (Qwen3-4B) sube del ~16% al ~46% de tareas resueltas en AppWorld solo con memoria destilada, sin reentrenar.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>La memoria mejora mucho a los agentes, pero los modelos pequeños (los que caben en edge/IoT) no generan por sí solos suficientes trayectorias buenas de las que aprender. AMD transfiere la experiencia de un agente grande a uno pequeño en forma de memoria jerárquica, sin tocar los pesos: conocimiento que el pequeño consulta cuando trabaja.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Un veterano deja escritas sus lecciones para un novato en tres niveles: estrategia general ("cómo se resuelven estas tareas"), subtareas ("los pasos típicos") y funciones concretas ("qué herramienta usar y cuándo"). Lo escribe con plantillas, sin datos privados (identificadores y rutas se cambian por huecos genéricos), y el novato simplemente recupera la lección que toca en cada momento. Sin clases, sin reentrenamiento: apuntes bien hechos.</p>
+</div>
+
+<div class="paper">
+<h2>8. EduClaw-Bench: A Long-Horizon Benchmark for Pedagogical LLM Agents with Simulated Learners</h2>
+<p><span class="tag">IA en educación</span><span class="tag">Agentes</span> <a href="https://arxiv.org/abs/2608.03206">arXiv:2608.03206</a> (4 ago 2026)</p>
+<p class="impacto"><strong>Impacto:</strong> no está indexado en HuggingFace Papers (por eso no tiene votos), pero aparece en las recopilaciones semanales de papers de IA en educación y es el primer benchmark de este tipo.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Los LLM en educación se evalúan en tareas sueltas (corregir, responder una duda), pero enseñar es un proceso de semanas. EduClaw-Bench es el primer benchmark que evalúa agentes pedagógicos completos operando sobre un sistema de gestión de aprendizaje (LMS) con alumnos simulados que mejoran (o no) con el tiempo. Un hallazgo práctico importante: entrenar más con la recompensa habitual puede empeorar la calidad pedagógica, y el paper propone una regla de parada temprana.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>En vez de un examen de una pregunta, es un curso completo de prácticas: el agente hace de profesor durante semanas simuladas con estudiantes sintéticos, y se mide si los alumnos aprenden, si el profesor da andamiaje en vez de soltar la respuesta, y si responde a tiempo. Así se ve lo que un test rápido no ve: si el "profesor IA" enseña bien a la larga.</p>
+</div>
+
+<footer>
+<p>Selección generada el 5 de septiembre de 2026 a partir de los rankings mensuales de HuggingFace Papers y recopilaciones semanales especializadas, con cada paper verificado en su página de arXiv. Vídeo-resumen en NotebookLM disponible bajo petición.</p>
+<p><a href="index.html">Volver al índice</a></p>
+</footer>
+</body>
+</html>
