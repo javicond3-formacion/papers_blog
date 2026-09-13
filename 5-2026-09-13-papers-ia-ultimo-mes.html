@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los 8 papers de IA más importantes del último mes (septiembre 2026) | Papers Blog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Los 8 papers de IA más importantes del último mes (agosto-septiembre 2026)</h1>
+<p class="sub">Selección del 13 de septiembre de 2026, orientada a un perfil de investigación en LLMs, agentes, multimodalidad, IA en educación, modelos eficientes y ciencia abierta. La señal de impacto principal son los votos de la comunidad en HuggingFace Papers. Los resúmenes se han generado con el chat de NotebookLM sobre los papers como fuentes.</p>
+<p class="sub">Vídeo resumen (NotebookLM Video Overview): <a href="https://youtu.be/aCIaCJry8U0">https://youtu.be/aCIaCJry8U0</a> (YouTube, en oculto) · Notebook: <a href="https://notebook.google.com/notebook/914b6979-31ed-4dbf-810e-3c3a1dbd6a98">NotebookLM</a></p>
+</header>
+
+<div class="paper">
+<h2>1. Repo-To-Skill: Distilling GitHub Repositories Into AI4AI Skills</h2>
+<p><span class="tag">Agentes</span><span class="tag">LLMs</span><span class="tag">Open source</span> <a href="https://arxiv.org/abs/2609.02749">arXiv:2609.02749</a> (2 sep 2026, BAAI)</p>
+<p class="impacto"><strong>Impacto:</strong> el paper más votado del periodo en HuggingFace Papers, con 545 votos. Más de 5.000 habilidades verificadas destiladas de 1.000 repositorios, con mejoras de hasta el 134,3% en MLE-bench.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>Frente a las arquitecturas previas de agentes de investigación que combinan un modelo base con entornos de planificación pero dejan fuera el conocimiento práctico del dominio, este trabajo introduce la noción de &quot;conocimiento operacional&quot; . Para cubrir esta carencia, los autores presentan el agente DisCo y la biblioteca AREX-Skill Library, la cual reúne más de 5.000 habilidades verificadas destiladas a partir de 1.000 repositorios de código abierto organizados en 20 áreas y 178 familias de capacidades . Al equipar al agente con estas habilidades, se obtienen mejoras significativas en el estado del arte sobre el mismo agente sin habilidades, registrando incrementos del 134,3% en MLE-bench, 34,4% en PaperBench, 9,2% en FrontierCS y 14,0% en PassNet bajo un presupuesto y modelo fijos . De este modo, se demuestra que condensar repositorios masivos en habilidades reutilizables y verificadas permite a los agentes ejecutar tareas complejas de forma mucho más efectiva sin redescubrir el procedimiento en cada ejecución.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Para entenderlo de manera sencilla, el sistema funciona como un estudiante que aprende a programar y resumir las mejores prácticas de GitHub : El problema de la información extensa: Los repositorios de código en GitHub contienen las instrucciones prácticas para hacer funcionar un algoritmo, pero el código completo es demasiado grande para que el agente lo lea todo mientras realiza un trabajo.
+ Destilación en dos vías: Para solucionarlo, el agente DisCo realiza una &quot;destilación&quot; (condensación) en dos formatos: uno agnóstico a la tarea (revisa proyectos populares y crea una librería de consulta general) y otro orientado a la tarea (crea habilidades a la medida de un problema específico).
+ Empaquetado en habilidades compactas: Esa información resumida se convierte en &quot;habilidades&quot; (skills) pequeñas, verificadas y fáciles de procesar, organizadas dentro de una biblioteca centralizada como AREX-Skill Library.
+ Reutilización durante la ejecución: Cuando el agente debe resolver un proyecto de investigación, no pierde tiempo reinventando la rueda ni leyendo repositorios enteros, sino que carga y aplica directamente estas habilidades verificadas en su flujo de trabajo .</p>
+</div>
+
+<div class="paper">
+<h2>2. StudentSim: Training LLM-based Student Simulators</h2>
+<p><span class="tag">IA en educación</span><span class="tag">Agentes</span> <a href="https://arxiv.org/abs/2609.01591">arXiv:2609.01591</a> (1 sep 2026, Microsoft Research)</p>
+<p class="impacto"><strong>Impacto:</strong> 488 votos en HuggingFace Papers. Supera a GPT-5.4 y Maia2 en fidelidad de simulación de estudiantes y ya se usa como modelo de recompensa para entrenar tutores de IA.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>StudentSim resuelve las limitaciones de los enfoques previos —como los modelos de seguimiento de estado que no procesan adecuadamente explicaciones o el juego de rol con modelos de lenguaje que no refleja fielmente la competencia del alumno— al transformar datos dispersos en simuladores individualizados de estudiantes . Además, los autores introducen el marco de evaluación estandarizado StudentSimEval para medir la fidelidad del comportamiento y la capacidad de respuesta a las orientaciones del tutor en ajedrez, escritura en inglés y matemáticas . La propuesta supera a modelos de referencia como GPT-5.4 y Maia2 en ambas métricas a lo largo de todos los dominios evaluados . Finalmente, demuestra que emplear StudentSim como modelo de recompensa en el aprendizaje por refuerzo permite entrenar tutores de IA calificados por expertos humanos como más precisos, mejor guiados y más personalizados.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Para un estudiante de grado, la manera más sencilla de entender StudentSim es imaginar que creamos un &quot;alumno virtual&quot; que piensa, se equivoca y aprende exactamente como lo haría un estudiante humano específico.
+ El proceso de funcionamiento se divide en dos fases principales : Entrenamiento agrupado (pooled training): En primer lugar, se entrena el modelo con los datos recopilados de un grupo amplio de estudiantes para que aprenda los patrones generales de cómo la gente resuelve problemas y responde en una materia (por ejemplo, ajedrez o matemáticas).
+ Especialización por estudiante (per-student specialization): A continuación, el modelo se ajusta de forma fina utilizando los datos concretos (incluso si son muy reducidos) de un alumno en particular, logrando imitar sus conocimientos específicos, sus errores habituales y su nivel real de competencia.
+ Gracias a este diseño, el simulador logra dos cosas fundamentales: reproduce las respuestas habituales de ese alumno frente a un problema y, al mismo tiempo, reacciona y actualiza su comportamiento de forma realista cuando un tutor de IA le da explicaciones o correcciones . Esto permite usar al estudiante virtual como un &quot;gimnasio de pruebas&quot; para entrenar tutores automáticos sin tener que probarlos constantemente con personas reales .</p>
+</div>
+
+<div class="paper">
+<h2>3. Scaling Automatic Research Agents via World Models</h2>
+<p><span class="tag">Agentes</span><span class="tag">LLMs</span> <a href="https://arxiv.org/abs/2608.12564">arXiv:2608.12564</a> (12 ago 2026, Univ. of Illinois)</p>
+<p class="impacto"><strong>Impacto:</strong> 446 votos en HuggingFace Papers. Acelera 3-4x el entrenamiento por refuerzo de agentes de investigación y permite a modelos de 4B-9B superar a modelos abiertos de 48B-120B.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>El trabajo aborda un cuello de botella crítico de los agentes de investigación previa, donde la ejecución de código en entornos reales ralentiza el entrenamiento por aprendizaje por refuerzo al no poder aprovechar el procesamiento en lote (batching) . Para resolver esta limitación, propone el marco World Model RL (WMRL), el cual reemplaza la ejecución en entornos reales por un modelo del mundo simulado . Además, el método incluye dos técnicas de mitigación (Online Debiasing e Inverse-Variance Denoising) que corrigen el sesgo y reducen el ruido de las simulaciones imperfectas . Gracias a este aporte, WMRL acelera el entrenamiento de 3 a 4 veces y permite que modelos compactos de 4B y 9B parámetros superen a modelos abiertos mucho mayores de 48B y 120B en tareas de investigación.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Para entenderlo de forma sencilla, imagina que estás enseñando a un agente de IA a programar e investigar. En los sistemas tradicionales, cada vez que la IA propone una idea, tiene que ejecutar el código en un ordenador real y esperar el resultado, lo que lleva mucho tiempo.
+ WMRL cambia este proceso creando un modelo del mundo (un &quot;simulador&quot;) : Entrenamiento en simulador: En lugar de ejecutar el código en una máquina real, el agente le pregunta al simulador &quot;¿qué pasaría si pruebo esta solución?&quot;, obteniendo una respuesta y una evaluación casi instantáneas.
+ Corrección de errores del simulador: Como el simulador es una aproximación y puede tener fallos, el sistema aplica dos correcciones : Reajuste de sesgo (Online Debiasing): Corrige si el simulador tiende a ser demasiado optimista o pesimista.
+ Filtro de ruido (Inverse-Variance Denoising): Reduce el impacto de las respuestas inestables o aleatorias del simulador.
+ Gracias a esta combinación, el agente puede ensayar millones de ideas rápidamente en un entorno virtual seguro y fiable sin quedarse atascado esperando ejecuciones reales .</p>
+</div>
+
+<div class="paper">
+<h2>4. StateM: Reaching 95.3% Raw Accuracy, or a $15 Frontier Run, on Terminal-Bench 2.1 via Harness Scaling</h2>
+<p><span class="tag">Agentes</span><span class="tag">LLMs</span> <a href="https://arxiv.org/abs/2608.15089">arXiv:2608.15089</a> (15 ago 2026, Ziheng Qin y colaboradores)</p>
+<p class="impacto"><strong>Impacto:</strong> 446 votos en HuggingFace Papers y más de 1.000 estrellas en GitHub. Marca el estado del arte en Terminal-Bench 2.1 (95,3%) con un coste de solo $15 por ejecución.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>StateM introduce el paradigma del harness scaling, demostrando que es posible elevar drásticamente el rendimiento de los agentes de IA en tareas complejas de horizonte largo optimizando su entorno de ejecución sin necesidad de modificar los pesos del modelo . A diferencia de los trabajos previos centrados en el reentrenamiento, este sistema resuelve fallos habituales como la pérdida de estado o la interrupción prematura mediante controles de estado persistentes y manuales de procedimiento (runbooks) reutilizables . Gracias a este diseño, logra alcanzar un 95,3% de precisión en el benchmark Terminal-Bench 2.1 y reduce el coste operativo de la API a tan solo 15 dólares, frente a los 574,68 dólares que requiere la ejecución de referencia tradicional.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Imagina a un agente de IA como a un estudiante que intenta resolver un proyecto largo en la terminal de comandos: a menudo se desorienta en tareas extensas, olvida qué cambios ha realizado, se salta pasos obligatorios o da el trabajo por terminado antes de tiempo . StateM funciona como un entorno de ejecución y supervisión externa (runtime) que estructura el trabajo del agente paso a paso sin tocar su arquitectura interna : Estados duraderos y contexto por fases: Guarda el progreso en fases claras y delimitadas, garantizando que el agente siempre sepa en qué punto exacto de la ejecución se encuentra.
+ Transiciones verificadas y manuales (runbooks): Establece rutinas y flujos de trabajo con comprobaciones continuas que impiden que el agente avance a la siguiente fase sin verificar los resultados previos o que abandone la tarea de forma prematura.
+ Controles persistentes basados en errores: Analiza los fallos cometidos en ejecuciones pasadas (postmortems) y los convierte en reglas ejecutables y precondiciones obligatorias que el sistema impone en los siguientes intentos .</p>
+</div>
+
+<div class="paper">
+<h2>5. NeoHorse-1: Towards Recursive Self-Improvement via Agentic Post-Training with Routing Harness</h2>
+<p><span class="tag">Agentes</span><span class="tag">LLMs</span> <a href="https://arxiv.org/abs/2609.08183">arXiv:2609.08183</a> (8 sep 2026, TokenRhythm)</p>
+<p class="impacto"><strong>Impacto:</strong> 410 votos en HuggingFace Papers. Propone un bucle cerrado de automejora recursiva: el agente convierte su propia ejecución en datos de entrenamiento.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>NeoHorse-1 propone un mecanismo concreto hacia la automejora recursiva (recursive self-improvement) en inteligencia artificial mediante un proceso de posentrenamiento de agentes (agentic post-training) respaldado por un sistema de enrutamiento inteligente . Frente a aproximaciones previas, el sistema observa continuamente su propia ejecución en diversas tareas y transforma esas interacciones en datos de entrenamiento de alta calidad que conservan razonamiento intercalado, uso de herramientas y contexto de ejecución . Esto establece un bucle cerrado de evaluación-selección-actualización donde el rendimiento alcanzado en cada ciclo determina automáticamente la mezcla de datos para el siguiente . Como resultado, permite que modelos más compactos (como su versión de 4B parámetros) mejoren significativamente su desempeño en benchmarks de código, razonamiento y seguimiento de instrucciones, acortando drásticamente la brecha con modelos base de mayor tamaño como el de 9B.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Para un estudiante de grado, se puede entender como un sistema que aprende de su propia experiencia de uso siguiendo cuatro pasos principales: Registro de demanda y enrutamiento: Cada vez que un usuario realiza una consulta, un administrador de enrutamiento (routing harness) evalúa la dificultad de la tarea y decide qué modelo de un conjunto heterogéneo debe responder, guardando un registro de la demanda de capacidad y de la interacción resultante.
+ Transformación y filtrado de datos: Esos registros de interacción no se usan tal cual; se convierten en ejemplos de entrenamiento que capturan los pasos de razonamiento interno, las llamadas a herramientas y el contexto. Luego se filtran mediante validación estructural, un análisis semántico de seis dimensiones y etiquetado fino por subescenas para garantizar que solo se conserven datos de alta calidad.
+ Curriculum en tres etapas y destilación: Las señales recopiladas por el enrutador organizan el entrenamiento supervisado en un plan de estudios (curriculum) de tres fases. Además, se realiza una destilación donde un modelo &quot;profesor&quot; supervisa y guía las respuestas generadas por el modelo &quot;estudiante&quot; bajo esa misma progresión.
+ Cierre del bucle de automejora: Las evaluaciones finales alimentan el distribuidor de datos, decidiendo qué competencias se deben reforzar en la siguiente ronda. De este modo, lo que el sistema aprende a hacer determina directamente de qué aprenderá después .</p>
+</div>
+
+<div class="paper">
+<h2>6. Compile by Training: Turning Natural-Language Specifications into Local Neural Functions</h2>
+<p><span class="tag">Modelos eficientes</span><span class="tag">Edge</span> <a href="https://arxiv.org/abs/2609.04199">arXiv:2609.04199</a> (3 sep 2026, Univ. of Waterloo)</p>
+<p class="impacto"><strong>Impacto:</strong> 383 votos en HuggingFace Papers. Convierte especificaciones en lenguaje natural en funciones neuronales locales que se ejecutan sin llamar a un LLM en producción.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>El artículo introduce compile by training, una técnica que convierte especificaciones en lenguaje natural en funciones neuronales locales y reutilizables, superando la latencia, los costos recurrentes y la dependencia de proveedores externos derivados de consultar modelos remotos . Frente a compiladores rápidos previos como Program-as-Weights, que operan en segundos pero logran cero coincidencias exactas en evaluaciones complejas como FuzzyBench-Hard, este nuevo método alcanza un 83.6% de precisión semántica . A cambio de un mayor tiempo de compilación inicial (alrededor de un minuto), aporta la capacidad de empaquetar comportamientos de texto en componentes neuronales locales que se pueden almacenar, versionar y componer como software tradicional.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Para entender su funcionamiento desde una perspectiva de ingeniería de software, el proceso se divide en los siguientes pasos: Generación de ejemplos sintéticos: Durante la fase de compilación, modelos grandes que actúan como profesores (teacher models) toman la especificación descriptiva en lenguaje natural y generan un conjunto de ejemplos de entrenamiento específicos para esa tarea.
+ Entrenamiento de un adaptador compacto: Con esos datos generados, se entrena un adaptador (adapter) pequeño sobre un intérprete neuronal compacto.
+ Ejecución local autónoma: Una vez finalizado el entrenamiento, la función neuronal local resultante puede ejecutarse de manera independiente sin volver a consultar a los modelos profesores, integrándose directamente en las aplicaciones como si fuera un módulo de código convencional .</p>
+</div>
+
+<div class="paper">
+<h2>7. AuK Technical Report: An Open-Source Foundational Model for Speech Generation and Editing</h2>
+<p><span class="tag">Multimodal</span><span class="tag">Open source</span> <a href="https://arxiv.org/abs/2609.08936">arXiv:2609.08936</a> (8 sep 2026, Tencent Hunyuan)</p>
+<p class="impacto"><strong>Impacto:</strong> 216 votos en HuggingFace Papers y más de 670 estrellas en GitHub. Modelo fundacional de habla abierto, descargable y usable por la comunidad.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>AuK aporta al estado del arte un modelo fundacional de código abierto que unifica la generación y la edición de habla bajo una misma interfaz basada en instrucciones de lenguaje natural y contexto de audio . A diferencia de desarrollos previos, el modelo se entrena sobre un corpus masivo de 3.030 millones de instancias de instrucción-audio y 1,95 millones de horas de supervisión efectiva abarcando cinco familias de tareas de audio . Además, introduce AuK-Flash, una variante destilada capaz de realizar inferencias en solo 4 pasos sin guía libre de clasificador (classifier-free guidance), logrando acelerar la ejecución 4,5 veces frente al modelo completo . Finalmente, los autores liberan abiertamente tanto el código fuente como los pesos del modelo para impulsar la reproducibilidad y la investigación abierta en la producción de voz.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Explicado de forma sencilla para un estudiante de grado, el funcionamiento de AuK se divide en cuatro bloques principales: Comprensión de instrucciones y audio (Acondicionamiento): El sistema utiliza un modelo de lenguaje grande (LLM) multimodal para procesar el significado semántico de las instrucciones de texto . Al mismo tiempo, emplea un autoencodificador variacional (VAE) entrenado en voz, música y audio general para extraer y codificar las características acústicas del sonido.
+ Síntesis con transformador híbrido: La generación del audio la realiza un transformador de flujo rectificado híbrido (hybrid rectified-flow Transformer) . Este utiliza primero bloques MMDiT de doble flujo para procesar la información semántica y acústica en paralelo, y luego pasa a bloques DiT de flujo único para integrar ambas señales y generar la onda final.
+ Entrenamiento y refinamiento por etapas: El proceso comienza con una fase de calentamiento orientada a la generación de habla y continúa con un preentrenamiento conjunto de generación y edición . Posteriormente, aplica dos tipos de postentrenamiento: optimización de preferencias con retroalimentación humana para la edición abierta y aprendizaje por refuerzo basado en recompensas para afinar la generación de voz.
+ Aceleración para ejecución rápida (AuK-Flash): Para evitar tiempos de espera altos en aplicaciones reales, los autores crean una versión comprimida mediante un proceso de destilación (consistency initialization y task-routed Decoupled DMD) . Esto permite obtener audio de alta calidad reduciendo drásticamente el número de pasos de cómputo .</p>
+</div>
+
+<div class="paper">
+<h2>8. Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning</h2>
+<p><span class="tag">LLMs</span><span class="tag">Modelos eficientes</span> <a href="https://arxiv.org/abs/2609.03430">arXiv:2609.03430</a> (3 sep 2026, Salesforce)</p>
+<p class="impacto"><strong>Impacto:</strong> 180 votos en HuggingFace Papers. Repasa la gestión de la caché KV, clave para razonamiento largo eficiente en modelos de lenguaje.</p>
+<h3>Qué aporta al estado del arte</h3>
+<p>A diferencia de los métodos previos de evacuación del KV cache, que evaluaban y puntuaban la importancia de cada token para decidir cuál conservar, Random Attention demuestra que esa señal de selección no aporta un valor significativo . La propuesta elimina por completo el cálculo de puntuaciones, conservando el prompt inicial y descartando tokens de forma uniforme y aleatoria dentro de cada cabeza de atención . Con esta estrategia, el modelo logra igualar la precisión de los algoritmos de selección más complejos a lo largo de cuatro modelos y seis tareas distintas de razonamiento . Asimismo, al erradicar la sobrecarga computacional asociada al cálculo de importancia, alcanza entre un 32% y un 43% más de rendimiento de procesamiento (throughput) en despliegues con vLLM.</p>
+<h3>Cómo lo hace, en fácil</h3>
+<p>Para comprender Random Attention de forma sencilla, se puede pensar en cómo un estudiante gestiona su memoria de borrador durante un problema largo: Protección prioritaria del prompt: El sistema conserva siempre intacta la instrucción original o prompt, ya que los experimentos revelaron que es la parte realmente frágil del cache y la clave para que el modelo no pierda el contexto inicial.
+ Desalojo aleatorio en el razonamiento: Para los tokens adicionales que se van generando en la cadena de pensamiento, el algoritmo no pierde tiempo midiendo qué datos son más relevantes, sino que elimina tokens al azar dentro de cada cabeza de atención (attention head).
+ Explotación de la redundancia natural: La selección aleatoria funciona gracias a que el proceso de razonamiento genera redundancia a dos niveles: Redundancia textual: A medida que el modelo piensa, reescribe y reitera de forma natural la información que aún necesita.
+ Redundancia en las cabezas de atención: Diferentes cabezas de atención guardan de forma independiente sus propias copias del rastro de razonamiento.
+ Debido a esta doble cobertura, la probabilidad de que la extracción aleatoria conserve copias suficientes de lo importante es muy alta, haciendo innecesario calcular puntuaciones de importancia .</p>
+</div>
+
+<footer>
+<p>Selección generada el 13 de septiembre de 2026 a partir de los rankings mensuales de HuggingFace Papers y recopilaciones semanales especializadas, con cada paper verificado en su página de arXiv. Los resúmenes de "Qué aporta" y "Cómo lo hace" se han generado con el chat de NotebookLM usando los 8 papers y <a href="https://javicond3.github.io/">javicond3.github.io</a> como fuentes. Vídeo resumen: <a href="https://youtu.be/aCIaCJry8U0">YouTube (oculto)</a>.</p>
+<p><a href="index.html">Volver al índice</a></p>
+</footer>
+</body>
+</html>
